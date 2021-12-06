@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { createUser } from "../../firebase/requests/auth";
+import { createUser } from "../../../firebase/requests/auth";
 
 import { Button } from "@material-ui/core";
-import LoginInput from "../common/CustomInput/LoginInput";
-import PasswordInput from "../common/CustomInput/PasswordInput";
-import NameInput from "../common/CustomInput/NameInput";
+import LoginInput from "../../common/CustomInput/LoginInput";
+import PasswordInput from "../../common/CustomInput/PasswordInput";
+import NameInput from "../../common/CustomInput/NameInput";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/reducers";
+import { RootState } from "../../../store/reducers";
+
+import "../Auth.scss";
 
 const Register = () => {
   const [login, setLogin] = useState("");
@@ -27,8 +29,8 @@ const Register = () => {
   }
 
   return (
-    <div className="container">
-      <div className="sign-up form-wrapper">
+    <div className="sign-up form-wrapper">
+      <div className="container">
         <form className="sign-up-form" onSubmit={submit}>
           <LoginInput value={login} setValue={setLogin} />
           <PasswordInput value={password} setValue={setPassword} />
@@ -37,7 +39,8 @@ const Register = () => {
             type="submit"
             className="custom-button custom-button__register"
             variant="contained"
-            color="secondary"
+            color="primary"
+            fullWidth
           >
             Register
           </Button>

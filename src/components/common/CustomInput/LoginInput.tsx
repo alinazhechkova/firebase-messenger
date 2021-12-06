@@ -14,7 +14,7 @@ const LoginInput = ({ value, setValue }: Props) => {
   };
 
   return (
-    <FormControl variant="standard">
+    <FormControl variant="standard" fullWidth margin="normal">
       <label htmlFor={"loginInput"}>Login</label>
       <Input
         fullWidth
