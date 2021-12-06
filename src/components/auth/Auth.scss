@@ -1,6 +1,13 @@
 .form-wrapper {
-  max-width: 300px;
-  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .container {
+    max-width: 300px;
+    width: 100%;
+  }
   .custom-button {
     margin: 15px 0;
   }
