@@ -8,7 +8,7 @@ const Chat = () => {
   const [user, setUser] = useState<any>(null);
 
   return (
-    <div className="chat-wrap">
+    <div className="chat__wrap">
       <UserList setUser={setUser} />
       <Dialogue user={user} setUser={setUser} />
     </div>

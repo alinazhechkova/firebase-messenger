@@ -1,6 +1,6 @@
-.user-list {
+.users-list {
   width: 30%;
-  .chat-user {
+  &__item {
     display: block;
     padding: 10px;
     border: 1px solid black;

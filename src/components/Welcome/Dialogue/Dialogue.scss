@@ -3,11 +3,21 @@
   display: flex;
   flex-direction: column;
   padding: 10px 50px;
-  &-form {
+  position: relative;
+
+  &__form {
     height: 50px;
     display: flex;
   }
-  &-messages {
+  &__messages {
     flex-grow: 1;
+  }
+  &__close-btn {
+    position: absolute;
+    right: 50px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
   }
 }

@@ -27,12 +27,12 @@ const UserList = ({ setUser }: Props) => {
   }, []);
 
   return (
-    <div className="user-list">
+    <div className="users-list">
       {users &&
         users.map((user: any) => (
           <div
             key={user.uid}
-            className="chat-user"
+            className="users-list__item"
             onClick={() => setUser(user)}
           >
             {user.name}

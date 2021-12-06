@@ -28,12 +28,12 @@ const Login = () => {
   return (
     <div className="login form-wrapper">
       <div className="container">
-        <form className="login-form" onSubmit={submit}>
+        <form className="login__form" onSubmit={submit}>
           <LoginInput value={email} setValue={setEmail} />
           <PasswordInput value={password} setValue={setPassword} />
           <Button
             type="submit"
-            className="custom-button custom-button-margin"
+            className="custom-button"
             variant="contained"
             color="primary"
             fullWidth
@@ -42,7 +42,7 @@ const Login = () => {
           </Button>
           <p>
             Don't have an account?{" "}
-            <Link className="link-to-page" to="/sign-up">
+            <Link className="login__link" to="/sign-up">
               Sign Up
             </Link>
           </p>

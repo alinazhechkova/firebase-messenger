@@ -17,20 +17,20 @@ const Dialogue = ({ user, setUser }: Props) => {
 
   return (
     <div className="dialogue">
-      <div className="dialogue-messages">
+      <button className="dialogue__close-btn" onClick={() => setUser(null)}>
+        X
+      </button>
+      <div className="dialogue__messages">
         {messages.length
           ? messages.map((message) => {
               <div>{message.title}</div>;
             })
           : "Write your first message"}
       </div>
-      <div className="dialogue-form">
+      <div className="dialogue__form">
         <TextField fullWidth label="Enter your message" />
         <Button>Send</Button>
       </div>
-      <button className="close-dialogue" onClick={() => setUser(null)}>
-        X
-      </button>
     </div>
   );
 };

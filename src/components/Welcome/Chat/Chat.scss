@@ -1,4 +1,6 @@
-.chat-wrap {
-  display: flex;
-  height: 500px;
+.chat {
+  &__wrap {
+    display: flex;
+    height: 500px;
+  }
 }
