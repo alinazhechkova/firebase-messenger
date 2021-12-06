@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 
 import { Button } from "@material-ui/core";
-import LoginInput from "../common/CustomInput/LoginInput";
-import PasswordInput from "../common/CustomInput/PasswordInput";
-import { signIn } from "../../firebase/requests/auth";
+import LoginInput from "../../common/CustomInput/LoginInput";
+import PasswordInput from "../../common/CustomInput/PasswordInput";
+import { signIn } from "../../../firebase/requests/auth";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/reducers";
+import { RootState } from "../../../store/reducers";
+
+import "../Auth.scss";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -24,8 +26,8 @@ const Login = () => {
   }
 
   return (
-    <div className="container">
-      <div className="login form-wrapper">
+    <div className="login form-wrapper">
+      <div className="container">
         <form className="login-form" onSubmit={submit}>
           <LoginInput value={email} setValue={setEmail} />
           <PasswordInput value={password} setValue={setPassword} />
@@ -33,12 +35,13 @@ const Login = () => {
             type="submit"
             className="custom-button custom-button-margin"
             variant="contained"
-            color="secondary"
+            color="primary"
+            fullWidth
           >
             Sign In
           </Button>
           <p>
-            Have an account?{" "}
+            Don't have an account?{" "}
             <Link className="link-to-page" to="/sign-up">
               Sign Up
             </Link>

@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import Routes from "./Routes";
 
-import "./App.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { auth, firestore } from "./firebase";
-import { BrowserRouter } from "react-router-dom";
 
 import { setCurrentUser } from "./store/actions/user";
+
+import "./App.css";
 
 function App() {
   const dispath = useDispatch();
 
-  const user = useSelector((state: any) => state);
   React.useEffect(() => {
     auth.onAuthStateChanged(async (authObj) => {
       if (authObj) {
