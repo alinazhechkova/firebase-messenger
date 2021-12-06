@@ -1,0 +1,13 @@
+.dialogue {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 50px;
+  &-form {
+    height: 50px;
+    display: flex;
+  }
+  &-messages {
+    flex-grow: 1;
+  }
+}
