@@ -1,0 +1,14 @@
+.welcome-page {
+  .container {
+    flex-direction: column;
+    & h3 {
+      font-size: 28px;
+      color: rgb(46, 56, 65);
+      text-align: center;
+    }
+  }
+  &__user {
+    display: block;
+    padding-top: 10px;
+  }
+}
