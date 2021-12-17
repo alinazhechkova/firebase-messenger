@@ -3,27 +3,23 @@ import { auth, db } from "../../../firebase";
 import { collection, where, query, onSnapshot } from "firebase/firestore";
 
 import "./UserList.scss";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../../store/actions/message";
 
-interface Props {
-  setUser: (user: any) => void;
-}
-
-const UserList = ({ setUser }: Props) => {
+const UserList = () => {
   const [users, setUsers] = useState<any>();
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    const users = collection(db, "users");
-    const q = query(users, where("uid", "not-in", [auth.currentUser!.uid]));
-    const unsub = onSnapshot(
-      q,
-      { includeMetadataChanges: true },
-      (querySnapshot) => {
-        let users: any = [];
-        querySnapshot.forEach((doc) => users.push(doc.data()));
-        setUsers(users);
-      }
-    );
-    return () => unsub();
+    const users = db
+      .collection("users")
+      .where("uid", "!=", auth.currentUser!.uid);
+    users.onSnapshot({ includeMetadataChanges: true }, (querySnapshot) => {
+      let users: any = [];
+      querySnapshot.forEach((doc) => users.push(doc.data()));
+      setUsers(users);
+    });
   }, []);
 
   return (
@@ -33,9 +29,12 @@ const UserList = ({ setUser }: Props) => {
           <div
             key={user.uid}
             className="users-list__item"
-            onClick={() => setUser(user)}
+            onClick={() => {
+              dispatch(setUser(user));
+              console.log(user);
+            }}
           >
-            {user.name}
+            {user.login}
           </div>
         ))}
     </div>

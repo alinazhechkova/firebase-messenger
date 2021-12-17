@@ -1,17 +1,18 @@
 import React, { useState } from "react";
+import { auth } from "../../../firebase";
 import Dialogue from "../Dialogue";
 import UserList from "../UserList";
 
 import "./Chat.scss";
 
 const Chat = () => {
-  const [user, setUser] = useState<any>(null);
-
-  return (
+  return auth.currentUser ? (
     <div className="chat__wrap">
-      <UserList setUser={setUser} />
-      <Dialogue user={user} setUser={setUser} />
+      <UserList />
+      <Dialogue />
     </div>
+  ) : (
+    <></>
   );
 };
 export default Chat;
