@@ -16,7 +16,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
-  const currentUser = useSelector((state: RootState) => state);
+  const currentUser = useSelector((state: RootState) => state.user);
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

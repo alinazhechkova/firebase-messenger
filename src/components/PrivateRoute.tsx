@@ -4,7 +4,7 @@ import { Route, Redirect, RouteProps } from "react-router-dom";
 import { RootState } from "../store/reducers";
 
 const PrivateRoute = ({ path, exact, component, children }: RouteProps) => {
-  const currentUser = useSelector((state: RootState) => state);
+  const currentUser = useSelector((state: RootState) => state.user);
 
   return (
     <>

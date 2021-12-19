@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/reducers";
 import { setUser } from "../../../store/actions/message";
 import MessageList from "../MessageList";
+import firebase from "firebase/compat";
 
 const Dialogue = () => {
   const user = useSelector((state: RootState) => state.message.user);
@@ -27,7 +28,7 @@ const Dialogue = () => {
       </button>
       {user ? (
         <>
-          <MessageList user={user} />
+          <MessageList />
           <div className="dialogue__form">
             <form
               action="#"
@@ -38,6 +39,7 @@ const Dialogue = () => {
                     title: text,
                     senderId,
                     receiverId: user.uid,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                   };
                   sendMessage(message);
                   setText("");
