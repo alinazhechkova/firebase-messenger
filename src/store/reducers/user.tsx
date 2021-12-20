@@ -6,7 +6,7 @@ export type User = {
 
 const userReducer = (state: User | null = null, action: any) => {
   switch (action.type) {
-    case "setCurrentUser":
+    case "SET_CURRENT_USER":
       state = action.user;
       return state;
     default:

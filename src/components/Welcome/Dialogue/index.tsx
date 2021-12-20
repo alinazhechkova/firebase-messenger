@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 
-import { auth, db } from "../../../firebase";
+import { auth } from "../../../firebase";
 import sendMessage from "../../../firebase/requests/message";
 
-import "./Dialogue.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../store/reducers";
-import { setUser } from "../../../store/actions/message";
+import { useDispatch } from "react-redux";
+import { clearUser } from "../../../store/actions/message";
 import MessageList from "../MessageList";
 import firebase from "firebase/compat";
 
-const Dialogue = () => {
-  const user = useSelector((state: RootState) => state.message.user);
+import "./Dialogue.scss";
+
+const Dialogue = ({ user }: any) => {
   const dispath = useDispatch();
   const senderId: string = auth.currentUser!.uid;
 
@@ -20,15 +19,15 @@ const Dialogue = () => {
 
   return (
     <div className="dialogue">
-      <button
-        className="dialogue__close-btn"
-        onClick={() => dispath(setUser(null))}
-      >
-        X
-      </button>
       {user ? (
         <>
-          <MessageList />
+          <button
+            className="dialogue__close-btn"
+            onClick={() => dispath(clearUser())}
+          >
+            X
+          </button>
+          <MessageList user={user} />
           <div className="dialogue__form">
             <form
               action="#"
@@ -39,9 +38,9 @@ const Dialogue = () => {
                     title: text,
                     senderId,
                     receiverId: user.uid,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    createdAt: firebase.firestore.Timestamp.now(),
                   };
-                  sendMessage(message);
+                  sendMessage(user.uid, message);
                   setText("");
                 }
               }}

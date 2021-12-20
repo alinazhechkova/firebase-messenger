@@ -2,7 +2,18 @@
   width: 30%;
   &__item {
     display: block;
+    padding: 10px 0;
+    align-self: flex-end;
+    margin-bottom: 2px;
     padding: 10px;
-    border: 1px solid black;
+    background-color: #cbcfffb6;
+    width: 200px;
+    height: 50px;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    &:hover {
+      background-color: #6d77ebb6;
+    }
   }
 }

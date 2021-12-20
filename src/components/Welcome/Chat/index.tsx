@@ -6,13 +6,16 @@ import UserList from "../UserList";
 import "./Chat.scss";
 
 const Chat = () => {
-  return auth.currentUser ? (
-    <div className="chat__wrap">
-      <UserList />
-      <Dialogue />
-    </div>
-  ) : (
-    <></>
+  const [user, setUser] = useState(null);
+
+  return (
+    auth.currentUser && (
+      <div className="chat__wrap">
+        <UserList setUser={setUser} />
+        <Dialogue user={user} />
+      </div>
+    )
   );
 };
+
 export default Chat;

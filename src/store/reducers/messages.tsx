@@ -1,4 +1,3 @@
-import { Action } from "redux";
 import { MessageType } from "../../firebase/requests/message";
 import { User } from "./user";
 
@@ -9,7 +8,7 @@ const defaultState = {
 
 interface Statetype {
   user: User;
-  messages: MessageType;
+  messages: MessageType[];
 }
 
 type messageType = Statetype | typeof defaultState;
@@ -18,8 +17,13 @@ const messageReducer = (state: messageType = defaultState, action: any) => {
   switch (action.type as string) {
     case "SET_USER":
       state!.user = action.user;
+      console.log("state");
+      return state;
+    case "CLEAR_USER":
+      state.user = null;
       return state;
     default:
+      console.log("default");
       return state;
   }
 };

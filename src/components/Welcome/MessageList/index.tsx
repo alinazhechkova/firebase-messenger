@@ -1,39 +1,24 @@
-import {
-  collection,
-  onSnapshot,
-  orderBy,
-  query,
-  where,
-} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+
 import { db } from "../../../firebase";
 import { MessageType } from "../../../firebase/requests/message";
-import { RootState } from "../../../store/reducers";
 import Message from "./Message";
 
 import "./MessageList.scss";
 
-const MessageList = () => {
+const MessageList = ({ user }: any) => {
   const [messageList, setMessageList] = useState<MessageType[]>([]);
 
-  const user = useSelector((state: RootState) => state.message.user);
-
   useEffect(() => {
-    const q = query(collection(db, "messages"), orderBy("createdAt"));
-    const unsub = onSnapshot(
-      q,
-      {
-        includeMetadataChanges: true,
-      },
-      (doc) => {
+    const q = db.collection("chats").where("id", "==", user.uid);
+    const unsub = q.onSnapshot({ includeMetadataChanges: true }, (doc) => {
+      console.log();
+      doc.forEach((qe) => {
         let messages: any = [];
-        doc.forEach((querySnapshot) => {
-          messages.push(querySnapshot.data());
-        });
-        setMessageList(messages);
-      }
-    );
+        messages.push(qe.data());
+        setMessageList(qe.data().messages);
+      });
+    });
     return () => unsub();
   }, []);
 

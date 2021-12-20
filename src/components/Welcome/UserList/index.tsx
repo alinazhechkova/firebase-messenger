@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../../../firebase";
-import { collection, where, query, onSnapshot } from "firebase/firestore";
 
 import "./UserList.scss";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../../store/actions/message";
 
-const UserList = () => {
+const UserList = ({ setUser }: any) => {
   const [users, setUsers] = useState<any>();
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const users = db
@@ -29,12 +24,9 @@ const UserList = () => {
           <div
             key={user.uid}
             className="users-list__item"
-            onClick={() => {
-              dispatch(setUser(user));
-              console.log(user);
-            }}
+            onClick={() => setUser(user)}
           >
-            {user.login}
+            {user.name}
           </div>
         ))}
     </div>

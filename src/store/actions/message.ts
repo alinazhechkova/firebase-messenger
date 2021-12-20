@@ -1,8 +1,12 @@
 import { User } from "../reducers/user";
 
-export const setUser = (user: User | null) => {
+export const setUser = (user: User) => ({
+  type: "SET_USER",
+  user,
+});
+
+export const clearUser = () => {
   return {
-    type: "SET_USER",
-    user,
+    type: "CLEAR_USER",
   };
 };
