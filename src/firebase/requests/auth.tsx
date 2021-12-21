@@ -33,13 +33,6 @@ export const createUser = async function (signUpInfo: SignUpInfo) {
     auth.currentUser!.updateProfile({
       displayName: name,
     });
-
-    const chat = {
-      id: user?.uid,
-      messages: [],
-    };
-
-    await db.collection("chats").doc(user?.uid).set(chat);
   } catch ({ message }) {
     alert(message);
   }

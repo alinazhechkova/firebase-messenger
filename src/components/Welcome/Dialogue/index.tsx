@@ -11,7 +11,7 @@ import firebase from "firebase/compat";
 
 import "./Dialogue.scss";
 
-const Dialogue = ({ user }: any) => {
+const Dialogue = ({ user, chat }: any) => {
   const dispath = useDispatch();
   const senderId: string = auth.currentUser!.uid;
 
@@ -27,7 +27,7 @@ const Dialogue = ({ user }: any) => {
           >
             X
           </button>
-          <MessageList user={user} />
+          <MessageList user={user} chat={chat} />
           <div className="dialogue__form">
             <form
               action="#"
@@ -40,7 +40,7 @@ const Dialogue = ({ user }: any) => {
                     receiverId: user.uid,
                     createdAt: firebase.firestore.Timestamp.now(),
                   };
-                  sendMessage(user.uid, message);
+                  sendMessage(chat, message);
                   setText("");
                 }
               }}

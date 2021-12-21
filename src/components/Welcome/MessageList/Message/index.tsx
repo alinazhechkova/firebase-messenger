@@ -7,7 +7,6 @@ const Message = ({ message }: any) => {
   const currentUser = auth.currentUser;
   const isIn = message.senderId !== currentUser?.uid;
 
-  const messageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   return (

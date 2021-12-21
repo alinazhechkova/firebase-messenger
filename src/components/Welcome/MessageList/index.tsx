@@ -6,28 +6,34 @@ import Message from "./Message";
 
 import "./MessageList.scss";
 
-const MessageList = ({ user }: any) => {
+const MessageList = ({ user, chat }: any) => {
   const [messageList, setMessageList] = useState<MessageType[]>([]);
 
   useEffect(() => {
-    const q = db.collection("chats").where("id", "==", user.uid);
+    const q = db
+      .collection("messages")
+      .doc(chat)
+      .collection("chat")
+      .orderBy("createdAt");
+
     const unsub = q.onSnapshot({ includeMetadataChanges: true }, (doc) => {
-      console.log();
+      let messages: any = [];
       doc.forEach((qe) => {
-        let messages: any = [];
         messages.push(qe.data());
-        setMessageList(qe.data().messages);
       });
+      setMessageList(messages);
     });
+
     return () => unsub();
-  }, []);
+  }, [chat]);
 
   return (
     <div className="dialogue__messages">
       {messageList.length
-        ? messageList.map((message, index) => (
-            <Message key={index} message={message} />
-          ))
+        ? messageList.map((message, index) => {
+            console.log(message);
+            return <Message key={index} message={message} />;
+          })
         : "Write your first message"}
     </div>
   );

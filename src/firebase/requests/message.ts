@@ -1,5 +1,5 @@
 import firebase from "firebase/compat";
-import { collection } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { db } from "..";
 
 export type MessageType = {
@@ -8,12 +8,8 @@ export type MessageType = {
   receiverId: string;
 };
 
-const sendMessage = async (receiverId: string, message: MessageType) => {
-  const docs = db.collection("chats").doc(receiverId);
-
-  await docs.update({
-    messages: firebase.firestore.FieldValue.arrayUnion(message),
-  });
+const sendMessage = async (id: string, message: MessageType) => {
+  await addDoc(collection(db, "messages", id, "chat"), message);
 };
 
 export default sendMessage;

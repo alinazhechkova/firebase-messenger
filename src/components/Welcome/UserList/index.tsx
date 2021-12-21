@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { auth, db } from "../../../firebase";
+import { RootState } from "../../../store/reducers";
 
 import "./UserList.scss";
 
-const UserList = ({ setUser }: any) => {
+const UserList = ({ setUser, setChat }: any) => {
   const [users, setUsers] = useState<any>();
+  const currentUser = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     const users = db
@@ -17,6 +20,16 @@ const UserList = ({ setUser }: any) => {
     });
   }, []);
 
+  const currentChat = (user: any) => {
+    setUser(user);
+    const id =
+      currentUser!.uid > user.uid
+        ? `${currentUser!.uid + user.uid}`
+        : `${user.uid + currentUser!.uid}`;
+    setChat(id);
+    console.log(id);
+  };
+
   return (
     <div className="users-list">
       {users &&
@@ -24,7 +37,7 @@ const UserList = ({ setUser }: any) => {
           <div
             key={user.uid}
             className="users-list__item"
-            onClick={() => setUser(user)}
+            onClick={() => currentChat(user)}
           >
             {user.name}
           </div>
