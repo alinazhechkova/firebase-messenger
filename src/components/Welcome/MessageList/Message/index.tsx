@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { useRef } from "react";
 import { auth } from "../../../../firebase";
 
@@ -14,7 +15,9 @@ const Message = ({ message }: any) => {
       <div className="message-content">
         {isIn && <div className="user-avatar-container"></div>}
         {message.title}
-        <div className={`message-content-container`} ref={contentRef}></div>
+        <div className="message-content-container">
+          {moment(message.createdAt.toDate()).format("D MMM H:M")}
+        </div>
       </div>
     </div>
   );

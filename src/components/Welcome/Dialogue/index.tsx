@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Button, TextField } from "@material-ui/core";
+import React, { useState } from "react";
+import { Button, IconButton, TextField } from "@material-ui/core";
 
 import { auth } from "../../../firebase";
 import sendMessage from "../../../firebase/requests/message";
@@ -8,6 +8,8 @@ import { useDispatch } from "react-redux";
 import { clearUser } from "../../../store/actions/message";
 import MessageList from "../MessageList";
 import firebase from "firebase/compat";
+
+import NoMessages from "../../../images/noSelectedMessages.svg";
 
 import "./Dialogue.scss";
 
@@ -21,12 +23,7 @@ const Dialogue = ({ user, chat }: any) => {
     <div className="dialogue">
       {user ? (
         <>
-          <button
-            className="dialogue__close-btn"
-            onClick={() => dispath(clearUser())}
-          >
-            X
-          </button>
+          <IconButton onClick={() => dispath(clearUser())}>X</IconButton>
           <MessageList user={user} chat={chat} />
           <div className="dialogue__form">
             <form
@@ -53,12 +50,14 @@ const Dialogue = ({ user, chat }: any) => {
                 }
                 value={text}
               />
-              <Button type="submit">Send</Button>
+              <Button variant="contained" type="submit" color="primary">
+                Send
+              </Button>
             </form>
           </div>
         </>
       ) : (
-        <>Choose friend to write</>
+        <img src={NoMessages} alt="no messages" />
       )}
     </div>
   );

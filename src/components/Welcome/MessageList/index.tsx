@@ -6,6 +6,8 @@ import Message from "./Message";
 
 import "./MessageList.scss";
 
+import NoMessage from "../../../images/no-search-result.svg";
+
 const MessageList = ({ user, chat }: any) => {
   const [messageList, setMessageList] = useState<MessageType[]>([]);
 
@@ -29,12 +31,13 @@ const MessageList = ({ user, chat }: any) => {
 
   return (
     <div className="dialogue__messages">
-      {messageList.length
-        ? messageList.map((message, index) => {
-            console.log(message);
-            return <Message key={index} message={message} />;
-          })
-        : "Write your first message"}
+      {messageList.length ? (
+        messageList.map((message, index) => (
+          <Message key={index} message={message} />
+        ))
+      ) : (
+        <img src={NoMessage} alt="no messages" />
+      )}
     </div>
   );
 };

@@ -12,7 +12,7 @@ const Chat = () => {
   return (
     auth.currentUser && (
       <div className="chat__wrap">
-        <UserList setUser={setUser} setChat={setChat} />
+        <UserList setUser={setUser} setChat={setChat} chat={chat} />
         <Dialogue user={user} chat={chat} />
       </div>
     )
