@@ -23,7 +23,6 @@ interface Props {
 }
 
 const Dialogue = ({ user }: Props) => {
-  console.log(user);
   const { currentChat, setCurrentChat } = useContext(MessengerContext);
 
   const senderId = auth.currentUser!.uid;
@@ -46,7 +45,7 @@ const Dialogue = ({ user }: Props) => {
                     title: text,
                     senderId,
                     receiverId: user.uid,
-                    createdAt: firebase.firestore.Timestamp.now(),
+                    createdAt: new Date(),
                   };
                   sendMessage(currentChat, message);
                   setText("");

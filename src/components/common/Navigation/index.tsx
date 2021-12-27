@@ -3,6 +3,8 @@ import { auth } from "../../../firebase";
 import { Link as RouterLink } from "react-router-dom";
 
 import { Link, LinkProps } from "@material-ui/core";
+import { refEqual } from "firebase/firestore";
+import { usersRef } from "../../../firebase/requests/auth";
 
 interface LinkRouterProps extends LinkProps {
   to: string;
@@ -22,7 +24,9 @@ const Navigation = () => {
       <LinkRouter
         underline="hover"
         color="primary"
-        onClick={() => auth.signOut()}
+        onClick={() => {
+          auth.signOut();
+        }}
         to="/login"
       >
         Login

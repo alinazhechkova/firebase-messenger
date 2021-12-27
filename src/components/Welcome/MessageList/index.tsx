@@ -17,13 +17,13 @@ interface Props {
 
 const MessageList = ({ user }: Props) => {
   const [messageList, setMessageList] = useState<MessageType[]>([]);
-  const { currentChat } = useContext(MessengerContext);
+  const { currentChat, currentUser } = useContext(MessengerContext);
 
   useEffect(() => {
     if (user && currentChat) {
       const q = db
         .collection("messages")
-        .doc(currentChat!)
+        .doc(currentChat)
         .collection("chat")
         .orderBy("createdAt");
       const unsub = q.onSnapshot({ includeMetadataChanges: true }, (doc) => {
@@ -33,7 +33,6 @@ const MessageList = ({ user }: Props) => {
         });
         setMessageList(messages);
       });
-
       return () => unsub();
     }
   }, [currentChat]);

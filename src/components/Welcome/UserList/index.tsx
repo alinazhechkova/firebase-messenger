@@ -15,16 +15,18 @@ const UserList = ({ setUser }: any) => {
   const { currentUser, setCurrentChat } = useContext<any>(MessengerContext);
 
   useEffect(() => {
-    const users = db
-      .collection("users")
-      .where("uid", "!=", auth.currentUser!.uid);
-    users.onSnapshot({ includeMetadataChanges: true }, (querySnapshot) => {
-      let users: any = [];
-      querySnapshot.forEach((doc) => users.push(doc.data()));
-      setUsers(users);
-    });
+    if (currentUser) {
+      const users = db
+        .collection("users")
+        .where("uid", "!=", auth.currentUser!.uid);
+      users.onSnapshot({ includeMetadataChanges: true }, (querySnapshot) => {
+        let users: any = [];
+        querySnapshot.forEach((doc) => users.push(doc.data()));
+        setUsers(users);
+      });
 
-    return () => setUsers([]);
+      return () => setUsers([]);
+    }
   }, []);
 
   const currentChat = (user: any) => {
