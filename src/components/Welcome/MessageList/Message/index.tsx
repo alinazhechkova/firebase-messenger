@@ -1,6 +1,8 @@
-import moment from "moment";
-import React, { useRef } from "react";
+import React from "react";
+
 import { auth } from "../../../../firebase";
+
+import moment from "moment";
 
 import "./Message.scss";
 

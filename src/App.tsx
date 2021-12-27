@@ -1,15 +1,14 @@
 import React from "react";
 import Routes from "./Routes";
 
-import { useDispatch } from "react-redux";
-
 import "./App.css";
+import { Switch } from "react-router-dom";
 
 function App() {
   return (
-    <div>
+    <Switch>
       <Routes />
-    </div>
+    </Switch>
   );
 }
 

@@ -1,16 +1,17 @@
 import React, { useContext, useState } from "react";
+
 import { Link, Redirect } from "react-router-dom";
 import { createUser } from "../../../firebase/requests/auth";
 
-import { Button } from "@material-ui/core";
+import { MessengerContext } from "../../../Provider";
+
 import LoginInput from "../../common/CustomInput/LoginInput";
 import PasswordInput from "../../common/CustomInput/PasswordInput";
 import NameInput from "../../common/CustomInput/NameInput";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../store/reducers";
+
+import { Button } from "@material-ui/core";
 
 import "../Auth.scss";
-import { MessengerContext } from "../../../Provider";
 
 const Register = () => {
   const [login, setLogin] = useState("");

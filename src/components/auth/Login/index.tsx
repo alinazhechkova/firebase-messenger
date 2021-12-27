@@ -1,15 +1,16 @@
 import React, { useContext, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 
-import { Button } from "@material-ui/core";
+import { signIn } from "../../../firebase/requests/auth";
+
+import { MessengerContext } from "../../../Provider";
+
 import LoginInput from "../../common/CustomInput/LoginInput";
 import PasswordInput from "../../common/CustomInput/PasswordInput";
-import { signIn } from "../../../firebase/requests/auth";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../store/reducers";
+
+import { Button } from "@material-ui/core";
 
 import "../Auth.scss";
-import { MessengerContext } from "../../../Provider";
 
 const Login = () => {
   const [email, setEmail] = useState("");

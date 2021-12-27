@@ -1,15 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { Box, Tab } from "@material-ui/core";
-import { useSelector } from "react-redux";
 import { auth, db } from "../../../firebase";
-import { RootState } from "../../../store/reducers";
+
+import { MessengerContext } from "../../../Provider";
+import { User } from "../Dialogue";
+
+import { Box, Tab } from "@material-ui/core";
 
 import "./UserList.scss";
-import { MessengerContext } from "../../../Provider";
 
 const UserList = ({ setUser }: any) => {
-  const [users, setUsers] = useState<any>();
+  const [users, setUsers] = useState<User[]>();
 
   const { currentUser, setCurrentChat } = useContext<any>(MessengerContext);
 
@@ -22,6 +23,8 @@ const UserList = ({ setUser }: any) => {
       querySnapshot.forEach((doc) => users.push(doc.data()));
       setUsers(users);
     });
+
+    return () => setUsers([]);
   }, []);
 
   const currentChat = (user: any) => {

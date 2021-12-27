@@ -1,22 +1,32 @@
 import React, { useContext, useState } from "react";
-import { Button, IconButton, TextField } from "@material-ui/core";
 
 import { auth } from "../../../firebase";
+import firebase from "firebase/compat";
 import sendMessage from "../../../firebase/requests/message";
 
-import MessageList from "../MessageList";
-import firebase from "firebase/compat";
+import { MessengerContext } from "../../../Provider";
 
+import MessageList from "../MessageList";
+
+import { Button, IconButton, TextField } from "@material-ui/core";
 import NoMessages from "../../../images/noSelectedMessages.svg";
 
 import "./Dialogue.scss";
-import { RootState } from "../../../store/reducers";
-import { MessengerContext } from "../../../Provider";
 
-const Dialogue = ({ user }: any) => {
+export type User = {
+  uid: string;
+  name: string;
+  login: string;
+};
+interface Props {
+  user: User | null;
+}
+
+const Dialogue = ({ user }: Props) => {
+  console.log(user);
   const { currentChat, setCurrentChat } = useContext(MessengerContext);
 
-  const senderId: string = auth.currentUser!.uid;
+  const senderId = auth.currentUser!.uid;
 
   const [text, setText] = useState("");
 

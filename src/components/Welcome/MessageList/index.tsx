@@ -4,12 +4,18 @@ import { db } from "../../../firebase";
 import { MessageType } from "../../../firebase/requests/message";
 import Message from "./Message";
 
-import "./MessageList.scss";
+import { MessengerContext } from "../../../Provider";
+import { User } from "../Dialogue";
 
 import NoMessage from "../../../images/no-search-result.svg";
-import { MessengerContext } from "../../../Provider";
 
-const MessageList = ({ user }: any) => {
+import "./MessageList.scss";
+
+interface Props {
+  user: User;
+}
+
+const MessageList = ({ user }: Props) => {
   const [messageList, setMessageList] = useState<MessageType[]>([]);
   const { currentChat } = useContext(MessengerContext);
 
