@@ -7,6 +7,7 @@ import { MessengerContext } from "../../../Provider";
 import { Box, Tab } from "@material-ui/core";
 
 import "./UserList.scss";
+import { DocumentData } from "firebase/firestore";
 
 interface Props {
   setUser: React.Dispatch<SetStateAction<User | null>>;
@@ -18,21 +19,22 @@ const UserList = ({ setUser }: Props) => {
   const { currentUser, setCurrentChat } = useContext<any>(MessengerContext);
 
   useEffect(() => {
-    if (currentUser) {
-      const users = db
-        .collection("users")
-        .where("uid", "!=", auth.currentUser!.uid);
-      users.onSnapshot({ includeMetadataChanges: true }, (querySnapshot) => {
+    const users = db
+      .collection("users")
+      .where("uid", "!=", auth.currentUser!.uid);
+    const unsub = users.onSnapshot(
+      { includeMetadataChanges: true },
+      (querySnapshot) => {
         let users: any = [];
         querySnapshot.forEach((doc) => users.push(doc.data()));
         setUsers(users);
-      });
+      }
+    );
 
-      return () => setUsers([]);
-    }
+    return () => unsub();
   }, []);
 
-  const currentChat = (user: any) => {
+  const currentChat = (user: User) => {
     setUser(user);
     const id =
       currentUser!.uid > user.uid
@@ -53,7 +55,7 @@ const UserList = ({ setUser }: Props) => {
       <div>
         {users &&
           users.length &&
-          users.map((user: any, index: number) => (
+          users.map((user, index) => (
             <Tab
               key={user.uid}
               label={user.name}

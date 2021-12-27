@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 
 import { auth } from "../../../firebase";
-import firebase from "firebase/compat";
 import sendMessage from "../../../firebase/requests/message";
 
 import { MessengerContext } from "../../../Provider";
