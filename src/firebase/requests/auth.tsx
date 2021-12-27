@@ -28,11 +28,7 @@ export const createUser = async function (signUpInfo: SignUpInfo) {
       login,
       uid: user?.uid,
     };
-
     await usersRef.doc(user?.uid).set(defaultUserSchema);
-    auth.currentUser!.updateProfile({
-      displayName: name,
-    });
   } catch ({ message }) {
     alert(message);
   }

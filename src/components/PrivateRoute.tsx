@@ -1,10 +1,9 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useContext } from "react";
 import { Route, Redirect, RouteProps } from "react-router-dom";
-import { RootState } from "../store/reducers";
+import { MessengerContext } from "../Provider";
 
 const PrivateRoute = ({ path, exact, component, children }: RouteProps) => {
-  const currentUser = useSelector((state: RootState) => state.user);
+  const { currentUser } = useContext<any>(MessengerContext);
 
   return (
     <>

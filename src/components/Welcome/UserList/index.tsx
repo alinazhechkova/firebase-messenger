@@ -1,15 +1,17 @@
-import { Box, Tab, Tabs } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+
+import { Box, Tab } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { auth, db } from "../../../firebase";
 import { RootState } from "../../../store/reducers";
 
 import "./UserList.scss";
+import { MessengerContext } from "../../../Provider";
 
-const UserList = ({ setUser, setChat }: any) => {
+const UserList = ({ setUser }: any) => {
   const [users, setUsers] = useState<any>();
-  const currentUser = useSelector((state: RootState) => state.user);
-  const [value, setValue] = useState(0);
+
+  const { currentUser, setCurrentChat } = useContext<any>(MessengerContext);
 
   useEffect(() => {
     const users = db
@@ -28,11 +30,7 @@ const UserList = ({ setUser, setChat }: any) => {
       currentUser!.uid > user.uid
         ? `${currentUser!.uid + user.uid}`
         : `${user.uid + currentUser!.uid}`;
-    setChat(id);
-  };
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    setCurrentChat(id);
   };
 
   return (
@@ -44,13 +42,7 @@ const UserList = ({ setUser, setChat }: any) => {
         width: 300,
       }}
     >
-      <Tabs
-        orientation="vertical"
-        value={value}
-        onChange={handleChange}
-        variant="scrollable"
-        sx={{ borderRight: 1, borderColor: "primary" }}
-      >
+      <div>
         {users &&
           users.length &&
           users.map((user: any, index: number) => (
@@ -61,7 +53,7 @@ const UserList = ({ setUser, setChat }: any) => {
               {...a11yProps(index)}
             />
           ))}
-      </Tabs>
+      </div>
     </Box>
   );
 };

@@ -1,15 +1,34 @@
-import { combineReducers } from "redux";
-import messageReducer from "./messages";
-import userReducer from "./user";
-
 export type RootState = {
-  user: ReturnType<typeof userReducer>;
-  message: ReturnType<typeof messageReducer>;
+  currentUser: User | null;
+  currentChat: string;
 };
 
-const reducers = combineReducers({
-  user: userReducer,
-  message: messageReducer,
-});
+export type User = {
+  login: string;
+  name: string;
+  uid: string;
+};
 
-export default reducers;
+const defaultState = {
+  currentUser: null,
+  currentChat: "",
+};
+
+const reducer = (state: RootState = defaultState, action: any) => {
+  switch (action.type as string) {
+    case "SET_CHAT":
+      state!.currentChat = action.chat;
+      return state;
+    case "CLEAR_CHAT":
+      state.currentChat = "";
+      console.log("h");
+      return state;
+    case "SET_CURRENT_USER":
+      state.currentUser = action.user;
+      return state;
+    default:
+      return state;
+  }
+};
+
+export default reducer;

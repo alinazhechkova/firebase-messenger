@@ -8,8 +8,6 @@ const Message = ({ message }: any) => {
   const currentUser = auth.currentUser;
   const isIn = message.senderId !== currentUser?.uid;
 
-  const contentRef = useRef<HTMLDivElement>(null);
-
   return (
     <div className={`message-container ${isIn ? "is-in" : "is-out"}`}>
       <div className="message-content">

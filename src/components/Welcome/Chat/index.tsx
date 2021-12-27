@@ -7,13 +7,12 @@ import "./Chat.scss";
 
 const Chat = () => {
   const [user, setUser] = useState(null);
-  const [chat, setChat] = useState("");
 
   return (
     auth.currentUser && (
       <div className="chat__wrap">
-        <UserList setUser={setUser} setChat={setChat} chat={chat} />
-        <Dialogue user={user} chat={chat} />
+        <UserList setUser={setUser} />
+        <Dialogue user={user} />
       </div>
     )
   );

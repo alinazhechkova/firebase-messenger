@@ -1,30 +1,31 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, IconButton, TextField } from "@material-ui/core";
 
 import { auth } from "../../../firebase";
 import sendMessage from "../../../firebase/requests/message";
 
-import { useDispatch } from "react-redux";
-import { clearUser } from "../../../store/actions/message";
 import MessageList from "../MessageList";
 import firebase from "firebase/compat";
 
 import NoMessages from "../../../images/noSelectedMessages.svg";
 
 import "./Dialogue.scss";
+import { RootState } from "../../../store/reducers";
+import { MessengerContext } from "../../../Provider";
 
-const Dialogue = ({ user, chat }: any) => {
-  const dispath = useDispatch();
+const Dialogue = ({ user }: any) => {
+  const { currentChat, setCurrentChat } = useContext(MessengerContext);
+
   const senderId: string = auth.currentUser!.uid;
 
   const [text, setText] = useState("");
 
   return (
     <div className="dialogue">
-      {user ? (
+      {user && currentChat ? (
         <>
-          <IconButton onClick={() => dispath(clearUser())}>X</IconButton>
-          <MessageList user={user} chat={chat} />
+          <IconButton onClick={() => setCurrentChat("")}>X</IconButton>
+          <MessageList user={user} />
           <div className="dialogue__form">
             <form
               action="#"
@@ -37,7 +38,7 @@ const Dialogue = ({ user, chat }: any) => {
                     receiverId: user.uid,
                     createdAt: firebase.firestore.Timestamp.now(),
                   };
-                  sendMessage(chat, message);
+                  sendMessage(currentChat, message);
                   setText("");
                 }
               }}

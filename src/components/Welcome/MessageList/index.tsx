@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { db } from "../../../firebase";
 import { MessageType } from "../../../firebase/requests/message";
@@ -7,27 +7,30 @@ import Message from "./Message";
 import "./MessageList.scss";
 
 import NoMessage from "../../../images/no-search-result.svg";
+import { MessengerContext } from "../../../Provider";
 
-const MessageList = ({ user, chat }: any) => {
+const MessageList = ({ user }: any) => {
   const [messageList, setMessageList] = useState<MessageType[]>([]);
+  const { currentChat } = useContext(MessengerContext);
 
   useEffect(() => {
-    const q = db
-      .collection("messages")
-      .doc(chat)
-      .collection("chat")
-      .orderBy("createdAt");
-
-    const unsub = q.onSnapshot({ includeMetadataChanges: true }, (doc) => {
-      let messages: any = [];
-      doc.forEach((qe) => {
-        messages.push(qe.data());
+    if (user && currentChat) {
+      const q = db
+        .collection("messages")
+        .doc(currentChat!)
+        .collection("chat")
+        .orderBy("createdAt");
+      const unsub = q.onSnapshot({ includeMetadataChanges: true }, (doc) => {
+        let messages: any = [];
+        doc.forEach((qe) => {
+          messages.push(qe.data());
+        });
+        setMessageList(messages);
       });
-      setMessageList(messages);
-    });
 
-    return () => unsub();
-  }, [chat]);
+      return () => unsub();
+    }
+  }, [currentChat]);
 
   return (
     <div className="dialogue__messages">

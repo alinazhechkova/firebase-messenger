@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 
 import { Button } from "@material-ui/core";
@@ -9,12 +9,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/reducers";
 
 import "../Auth.scss";
+import { MessengerContext } from "../../../Provider";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const currentUser = useSelector((state: RootState) => state.user);
+  const { currentUser } = useContext(MessengerContext);
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
