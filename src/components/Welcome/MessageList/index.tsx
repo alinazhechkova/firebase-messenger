@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import { db } from "../../../firebase";
-import { MessageType } from "../../../firebase/requests/message";
 import Message from "./Message";
 
 import { MessengerContext } from "../../../Provider";
-import { User } from "../Dialogue";
 
 import NoMessage from "../../../images/no-search-result.svg";
 
@@ -17,7 +15,7 @@ interface Props {
 
 const MessageList = ({ user }: Props) => {
   const [messageList, setMessageList] = useState<MessageType[]>([]);
-  const { currentChat, currentUser } = useContext(MessengerContext);
+  const { currentChat } = useContext(MessengerContext);
 
   useEffect(() => {
     if (user && currentChat) {

@@ -13,11 +13,6 @@ import NoMessages from "../../../images/noSelectedMessages.svg";
 
 import "./Dialogue.scss";
 
-export type User = {
-  uid: string;
-  name: string;
-  login: string;
-};
 interface Props {
   user: User | null;
 }

@@ -1,15 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { SetStateAction, useContext, useEffect, useState } from "react";
 
 import { auth, db } from "../../../firebase";
 
 import { MessengerContext } from "../../../Provider";
-import { User } from "../Dialogue";
 
 import { Box, Tab } from "@material-ui/core";
 
 import "./UserList.scss";
 
-const UserList = ({ setUser }: any) => {
+interface Props {
+  setUser: React.Dispatch<SetStateAction<User | null>>;
+}
+
+const UserList = ({ setUser }: Props) => {
   const [users, setUsers] = useState<User[]>();
 
   const { currentUser, setCurrentChat } = useContext<any>(MessengerContext);

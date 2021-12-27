@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { auth } from "../../../firebase";
 
-import Dialogue, { User } from "../Dialogue";
+import Dialogue from "../Dialogue";
 import UserList from "../UserList";
 
 import "./Chat.scss";

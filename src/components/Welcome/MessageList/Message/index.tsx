@@ -6,7 +6,11 @@ import moment from "moment";
 
 import "./Message.scss";
 
-const Message = ({ message }: any) => {
+interface Props {
+  message: MessageType;
+}
+
+const Message = ({ message }: Props) => {
   const currentUser = auth.currentUser;
   const isIn = message.senderId !== currentUser?.uid;
 

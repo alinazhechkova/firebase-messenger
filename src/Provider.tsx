@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const Provider = ({ children }: Props) => {
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [currentChat, setCurrentChat] = useState("");
 
   useEffect(() => {
@@ -17,8 +17,10 @@ export const Provider = ({ children }: Props) => {
       if (authObj) {
         const userRef = db.collection("users").doc(authObj.uid);
         userRef.onSnapshot((doc) => {
+          const data = doc.data();
           const userData = {
-            ...doc.data(),
+            name: data?.name,
+            login: data?.login,
             uid: authObj.uid,
           };
           setCurrentUser(userData);
