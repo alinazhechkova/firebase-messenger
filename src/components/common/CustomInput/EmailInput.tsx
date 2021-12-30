@@ -7,7 +7,7 @@ interface Props {
   setValue: Dispatch<SetStateAction<string>>;
 }
 
-const LoginInput = ({ value, setValue }: Props) => {
+const EmailInput = ({ value, setValue }: Props) => {
   const onInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const email = e.target.value.substring(0, 30);
     setValue(email);
@@ -15,17 +15,17 @@ const LoginInput = ({ value, setValue }: Props) => {
 
   return (
     <FormControl variant="standard" fullWidth margin="normal">
-      <label htmlFor={"loginInput"}>Email</label>
+      <label htmlFor="emailInput">Email</label>
       <Input
         fullWidth
         type="text"
-        className={`login-input`}
+        className="login-input"
         value={value}
         onChange={onInput}
-        id="loginInput"
+        id="emailInput"
       />
     </FormControl>
   );
 };
 
-export default LoginInput;
+export default EmailInput;

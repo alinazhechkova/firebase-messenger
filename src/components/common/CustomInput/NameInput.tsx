@@ -15,7 +15,7 @@ const NameInput = ({ value, setValue, err }: Props) => {
 
   return (
     <FormControl variant="standard" fullWidth margin="normal">
-      <label htmlFor={"nameInput"}>Name</label>
+      <label htmlFor="nameInput">Name</label>
       <Input
         fullWidth
         type="text"

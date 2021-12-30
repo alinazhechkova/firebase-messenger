@@ -19,18 +19,22 @@ const MessageList = ({ user }: Props) => {
 
   useEffect(() => {
     if (user && currentChat) {
-      const q = db
+      const query = db
         .collection("messages")
         .doc(currentChat)
         .collection("chat")
         .orderBy("createdAt");
-      const unsub = q.onSnapshot({ includeMetadataChanges: true }, (doc) => {
-        let messages: any = [];
-        doc.forEach((qe) => {
-          messages.push(qe.data());
-        });
-        setMessageList(messages);
-      });
+
+      const unsub = query.onSnapshot(
+        { includeMetadataChanges: true },
+        (doc) => {
+          let messages: any = [];
+          doc.forEach((qe) => {
+            messages.push(qe.data());
+          });
+          setMessageList(messages);
+        }
+      );
       return () => unsub();
     }
   }, [currentChat]);

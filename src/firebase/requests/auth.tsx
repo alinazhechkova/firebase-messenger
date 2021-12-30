@@ -4,7 +4,7 @@ import { auth, db } from "../index";
 
 export const usersRef = db.collection("users");
 
-export type SignUpInfo = {
+type SignUpInfo = {
   login: string;
   password: string;
   name: string;

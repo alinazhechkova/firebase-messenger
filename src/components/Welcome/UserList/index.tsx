@@ -4,10 +4,9 @@ import { auth, db } from "../../../firebase";
 
 import { MessengerContext } from "../../../Provider";
 
-import { Box, Tab } from "@material-ui/core";
+import { Box, Tab, Tabs } from "@material-ui/core";
 
 import "./UserList.scss";
-import { DocumentData } from "firebase/firestore";
 
 interface Props {
   setUser: React.Dispatch<SetStateAction<User | null>>;
@@ -15,6 +14,10 @@ interface Props {
 
 const UserList = ({ setUser }: Props) => {
   const [users, setUsers] = useState<User[]>();
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
 
   const { currentUser, setCurrentChat } = useContext<any>(MessengerContext);
 
@@ -46,23 +49,33 @@ const UserList = ({ setUser }: Props) => {
   return (
     <Box
       sx={{
+        flexGrow: 1,
         bgcolor: "background.paper",
         display: "flex",
-        height: 500,
-        width: 300,
+        height: 224,
       }}
     >
       <div>
-        {users &&
-          users.length &&
-          users.map((user, index) => (
-            <Tab
-              key={user.uid}
-              label={user.name}
-              onClick={() => currentChat(user)}
-              {...a11yProps(index)}
-            />
-          ))}
+        <Tabs
+          orientation="vertical"
+          variant="scrollable"
+          value={value}
+          //@ts-ignore
+          onChange={handleChange}
+          aria-label="Vertical tabs example"
+          sx={{ borderRight: 1, borderColor: "divider" }}
+        >
+          {users &&
+            users.length &&
+            users.map((user, index) => (
+              <Tab
+                key={user.uid}
+                label={user.name}
+                onClick={() => currentChat(user)}
+                {...a11yProps(index)}
+              />
+            ))}
+        </Tabs>
       </div>
     </Box>
   );

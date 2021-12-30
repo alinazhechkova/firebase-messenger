@@ -17,7 +17,6 @@ const Message = ({ message }: Props) => {
   return (
     <div className={`message-container ${isIn ? "is-in" : "is-out"}`}>
       <div className="message-content">
-        {isIn && <div className="user-avatar-container"></div>}
         {message.title}
         <div className="message-content-container">
           {moment(message.createdAt.toDate()).format("D MMM H:M")}

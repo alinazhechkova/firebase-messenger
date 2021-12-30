@@ -20,7 +20,7 @@ const PasswordInput = ({ value, setValue }: Props) => {
   return (
     <div className="password-field">
       <FormControl variant="standard" fullWidth margin="normal">
-        <label htmlFor={"passwordInput"}>Password</label>
+        <label htmlFor="passwordInput">Password</label>
         <Input
           type={`${show ? "text" : "password"}`}
           className="login-input login-input__password input-password"
