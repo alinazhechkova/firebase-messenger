@@ -5,7 +5,7 @@ import { signIn } from "../../../firebase/requests/auth";
 
 import { MessengerContext } from "../../../Provider";
 
-import LoginInput from "../../common/CustomInput/LoginInput";
+import EmailInput from "../../common/CustomInput/EmailInput";
 import PasswordInput from "../../common/CustomInput/PasswordInput";
 
 import { Button } from "@material-ui/core";
@@ -31,7 +31,7 @@ const Login = () => {
     <div className="login form-wrapper">
       <div className="container">
         <form className="login__form" onSubmit={submit}>
-          <LoginInput value={email} setValue={setEmail} />
+          <EmailInput value={email} setValue={setEmail} />
           <PasswordInput value={password} setValue={setPassword} />
           <Button
             type="submit"

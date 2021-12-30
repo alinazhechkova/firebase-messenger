@@ -5,7 +5,7 @@ import { createUser } from "../../../firebase/requests/auth";
 
 import { MessengerContext } from "../../../Provider";
 
-import LoginInput from "../../common/CustomInput/LoginInput";
+import EmailInput from "../../common/CustomInput/EmailInput";
 import PasswordInput from "../../common/CustomInput/PasswordInput";
 import NameInput from "../../common/CustomInput/NameInput";
 
@@ -34,7 +34,7 @@ const Register = () => {
     <div className="sign-up form-wrapper">
       <div className="container">
         <form className="sign-up-form" onSubmit={submit}>
-          <LoginInput value={login} setValue={setLogin} />
+          <EmailInput value={login} setValue={setLogin} />
           <PasswordInput value={password} setValue={setPassword} />
           <NameInput value={name} setValue={setName} />
           <Button
