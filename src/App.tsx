@@ -1,15 +1,15 @@
 import React from "react";
+
+import { Redirect, Switch } from "react-router-dom";
 import Routes from "./Routes";
 
 import "./App.css";
-import { Switch } from "react-router-dom";
 
-function App() {
-  return (
-    <Switch>
-      <Routes />
-    </Switch>
-  );
-}
+const App = () => (
+  <Switch>
+    <Routes />
+    <Redirect to="/" />
+  </Switch>
+);
 
 export default App;
