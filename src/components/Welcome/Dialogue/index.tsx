@@ -54,9 +54,9 @@ const Dialogue = ({ user }: Props) => {
                 }
                 value={text}
               />
-              <Button variant="contained" type="submit" color="primary">
+              <button type="submit" className="dialogue__submit-btn">
                 Send
-              </Button>
+              </button>
             </form>
           </div>
         </>

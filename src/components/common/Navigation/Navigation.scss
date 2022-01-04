@@ -6,13 +6,6 @@
     align-items: center;
     justify-content: space-between;
     a {
-      display: block;
-      padding: 10px 20px;
-      background-color: var(--color-primary-1);
-      text-transform: uppercase;
-      color: #fef5ed;
-      text-decoration: none;
-      font-weight: 500;
       &:first-child {
         margin-right: 20px;
       }

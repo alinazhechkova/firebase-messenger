@@ -6,7 +6,9 @@
 h1,
 h2,
 h3,
-p {
+p,
+a,
+button {
   font-family: var(--default-font);
   color: var(--color-text);
 }
@@ -29,4 +31,17 @@ h3 {
 }
 body {
   background-color: #f9fbf2;
+}
+button,
+a {
+  display: block;
+  padding: 10px 20px;
+  background-color: var(--color-primary-1);
+  color: #fef5ed;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  &:hover {
+    background-color: #859085;
+  }
 }
