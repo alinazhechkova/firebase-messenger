@@ -10,5 +10,9 @@
   }
   .custom-button {
     margin: 15px 0;
+    background-color: #99a799;
+    &:hover {
+      background-color: #627b58;
+    }
   }
 }
