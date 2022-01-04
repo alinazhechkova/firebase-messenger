@@ -20,9 +20,9 @@ const MessageList = ({ user }: Props) => {
   useEffect(() => {
     if (user && currentChat) {
       const query = db
-        .collection("messages")
+        .collection("chats")
         .doc(currentChat)
-        .collection("chat")
+        .collection("messages")
         .orderBy("createdAt");
 
       const unsub = query.onSnapshot(

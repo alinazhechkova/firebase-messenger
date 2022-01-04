@@ -1,3 +1,4 @@
+import firebase from "firebase/compat";
 import "firebase/firestore";
 
 import { auth, db } from "../index";
@@ -8,6 +9,15 @@ type SignUpInfo = {
   login: string;
   password: string;
   name: string;
+};
+export const isOfflineForDatabase = {
+  state: "offline",
+  lastChanged: firebase.database.ServerValue.TIMESTAMP,
+};
+
+export const isOnlineForDatabase = {
+  state: "online",
+  lastChanged: firebase.database.ServerValue.TIMESTAMP,
 };
 
 export const signIn = async function (email: string, password: string) {

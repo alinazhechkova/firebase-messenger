@@ -1,6 +1,8 @@
 const firebaseConfig = {
   apiKey: "AIzaSyA_E3CRyEvu4oD8SbpeA9f85-9VU-hZ9tM",
   authDomain: "fir-messenger-8b36d.firebaseapp.com",
+  databaseURL:
+    "https://fir-messenger-8b36d-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "fir-messenger-8b36d",
   storageBucket: "fir-messenger-8b36d.appspot.com",
   messagingSenderId: "545449137153",

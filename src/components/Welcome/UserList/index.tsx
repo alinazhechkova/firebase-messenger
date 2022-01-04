@@ -3,6 +3,7 @@ import React, { SetStateAction, useContext, useEffect, useState } from "react";
 import { auth, db } from "../../../firebase";
 
 import { MessengerContext } from "../../../Provider";
+import { usePresence } from "../../../utils/usePresence";
 
 import { Box, Tab, Tabs } from "@material-ui/core";
 
@@ -11,6 +12,15 @@ import "./UserList.scss";
 interface Props {
   setUser: React.Dispatch<SetStateAction<User | null>>;
 }
+
+const getText = (presence: any) => {
+  if (!presence) {
+    return "Unknown state";
+  }
+  return presence.state === "online"
+    ? "online"
+    : `last active ${new Date(presence.lastChanged)}`;
+};
 
 const UserList = ({ setUser }: Props) => {
   const [users, setUsers] = useState<User[]>();
@@ -28,7 +38,7 @@ const UserList = ({ setUser }: Props) => {
     const unsub = users.onSnapshot(
       { includeMetadataChanges: true },
       (querySnapshot) => {
-        let users: any = [];
+        const users: any = [];
         querySnapshot.forEach((doc) => users.push(doc.data()));
         setUsers(users);
       }
@@ -56,26 +66,19 @@ const UserList = ({ setUser }: Props) => {
       }}
     >
       <div>
-        <Tabs
-          orientation="vertical"
-          variant="scrollable"
-          value={value}
-          //@ts-ignore
-          onChange={handleChange}
-          aria-label="Vertical tabs example"
-          sx={{ borderRight: 1, borderColor: "divider" }}
-        >
-          {users &&
-            users.length &&
-            users.map((user, index) => (
-              <Tab
-                key={user.uid}
-                label={user.name}
-                onClick={() => currentChat(user)}
-                {...a11yProps(index)}
-              />
-            ))}
-        </Tabs>
+        {users &&
+          users.map((user, index) => {
+            return (
+              <>
+                <Tab
+                  key={user.uid}
+                  label={user.name}
+                  onClick={() => currentChat(user)}
+                />
+                <PresenceDot uid={user.uid} />
+              </>
+            );
+          })}
       </div>
     </Box>
   );
@@ -89,3 +92,8 @@ function a11yProps(index: number) {
     "aria-controls": `vertical-tabpanel-${index}`,
   };
 }
+
+const PresenceDot = ({ uid }: any) => {
+  const presence = usePresence(uid);
+  return <>{getText(presence)}</>;
+};
