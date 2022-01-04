@@ -15,6 +15,7 @@
   }
   &__messages {
     flex-grow: 1;
+    width: 100%;
   }
   .MuiButtonBase-root {
     align-self: flex-end;
@@ -24,5 +25,8 @@
   }
   .MuiButton-contained {
     background-color: #3c4c36;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
   }
 }

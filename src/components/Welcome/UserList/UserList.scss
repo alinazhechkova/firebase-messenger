@@ -1,5 +1,16 @@
 .users-list {
   width: 20%;
+  &__open-btn {
+    align-self: flex-start;
+    position: absolute;
+    z-index: 1;
+  }
+  &__mobile {
+    display: none;
+  }
+  &__mobile_active {
+    display: block;
+  }
   .user-wrap {
     cursor: pointer;
     padding: 10px 50px;
@@ -10,6 +21,7 @@
     border-radius: 5px;
     position: relative;
     cursor: pointer;
+    z-index: 1;
     &_active {
       background-color: var(--color-secondary-2);
     }
@@ -17,6 +29,13 @@
       position: relative;
       display: block;
     }
+  }
+  @media (max-width: 1000px) {
+    width: 30%;
+  }
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 45px;
   }
 }
 .dot {
