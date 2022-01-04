@@ -1,9 +1,9 @@
 import firebase from "firebase/compat";
-import { addDoc, collection } from "firebase/firestore";
 import { db } from "..";
 
 const sendMessage = async (id: string, message: MessageType) => {
-  await addDoc(collection(db, "chats", id, "messages"), message);
+  const messagesRef = db.collection("chats").doc(id).collection("messages");
+  await messagesRef.add(message);
 };
 
 export default sendMessage;
