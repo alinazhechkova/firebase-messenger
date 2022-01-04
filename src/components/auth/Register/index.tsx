@@ -23,7 +23,10 @@ const Register = () => {
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = { login, password, name };
-    createUser(data);
+
+    if (login.trim() && password.trim() && name.trim()) {
+      createUser(data);
+    }
   };
 
   if (currentUser) {

@@ -3,9 +3,8 @@ import React, { SetStateAction, useContext, useEffect, useState } from "react";
 import { auth, db } from "../../../firebase";
 
 import { MessengerContext } from "../../../Provider";
-import { usePresence } from "../../../utils/usePresence";
 
-import { Box } from "@material-ui/core";
+import PresenceDot from "./PresenceDot";
 
 import "./UserList.scss";
 
@@ -16,7 +15,8 @@ interface Props {
 const UserList = ({ setUser }: Props) => {
   const [users, setUsers] = useState<User[]>();
 
-  const { currentUser, setCurrentChat } = useContext<any>(MessengerContext);
+  const { currentUser, setCurrentChat, currentChat } =
+    useContext<any>(MessengerContext);
 
   useEffect(() => {
     const users = db
@@ -34,51 +34,40 @@ const UserList = ({ setUser }: Props) => {
     return () => unsub();
   }, []);
 
-  const currentChat = (user: User) => {
+  const currentChatHandler = (user: User) => {
     setUser(user);
-    const id =
-      currentUser!.uid > user.uid
-        ? `${currentUser!.uid + user.uid}`
-        : `${user.uid + currentUser!.uid}`;
+    const id = getChatId(user.uid);
     setCurrentChat(id);
+  };
+
+  const getChatId = (uid: string) => {
+    const id =
+      currentUser!.uid > uid
+        ? `${currentUser!.uid + uid}`
+        : `${uid + currentUser!.uid}`;
+
+    return id;
   };
 
   return (
     <div className="users-list">
-      <div>
-        {users &&
-          users.map((user) => (
-            <div
-              className="user-wrap"
-              key={user.uid}
-              onClick={() => currentChat(user)}
-            >
-              <h2>
-                {user.name}
-                <PresenceDot uid={user.uid} />
-              </h2>
-            </div>
-          ))}
-      </div>
+      {users &&
+        users.map((user) => (
+          <div
+            className={`user-wrap ${
+              getChatId(user.uid) === currentChat ? "user-wrap_active" : ""
+            } `}
+            key={user.uid}
+            onClick={() => currentChatHandler(user)}
+          >
+            <h2>
+              {user.name}
+              <PresenceDot uid={user.uid} />
+            </h2>
+          </div>
+        ))}
     </div>
   );
 };
 
 export default UserList;
-
-const PresenceDot = ({ uid }: any) => {
-  const presence = usePresence(uid);
-
-  const getText = (presence: any) => {
-    if (!presence) {
-      return <></>;
-    }
-    return presence.state === "online" ? (
-      <div className="dot_active dot" />
-    ) : (
-      <div className="dot" />
-    );
-  };
-
-  return <>{getText(presence)}</>;
-};

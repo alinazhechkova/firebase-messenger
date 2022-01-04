@@ -15,5 +15,6 @@ export const usePresence = (uid: string) => {
       userStatusRef.off();
     };
   }, [uid]);
+
   return presence;
 };

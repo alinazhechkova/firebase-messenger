@@ -5,7 +5,7 @@
   padding: 10px 50px;
   position: relative;
   justify-content: center;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 200px);
   &__form {
     form {
       display: flex;
@@ -21,5 +21,8 @@
   }
   img {
     height: 300px;
+  }
+  .MuiButton-contained {
+    background-color: #3c4c36;
   }
 }
