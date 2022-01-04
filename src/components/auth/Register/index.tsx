@@ -11,8 +11,9 @@ import NameInput from "../../common/CustomInput/NameInput";
 
 import { Button } from "@material-ui/core";
 
-import "../Auth.scss";
 import validateRegister, { validateEmail } from "../../../utils/validation";
+
+import "../Auth.scss";
 
 export type FormDataType = {
   name?: string;
@@ -28,6 +29,11 @@ export const defaultErrorObj = {
 
 const Register = () => {
   const [errors, setErrors] = useState<Partial<FormDataType>>(defaultErrorObj);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+
+  const { currentUser } = useContext(MessengerContext);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,12 +44,6 @@ const Register = () => {
       createUser(data);
     }
   };
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-
-  const { currentUser } = useContext(MessengerContext);
 
   if (currentUser) {
     return <Redirect to="/" />;

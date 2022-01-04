@@ -9,12 +9,12 @@ interface Props {
   children: React.ReactNode;
 }
 
-export const isOfflineForDatabase = {
+const isOfflineForDatabase = {
   state: "offline",
   lastChanged: firebase.database.ServerValue.TIMESTAMP,
 };
 
-export const isOnlineForDatabase = {
+const isOnlineForDatabase = {
   state: "online",
   lastChanged: firebase.database.ServerValue.TIMESTAMP,
 };

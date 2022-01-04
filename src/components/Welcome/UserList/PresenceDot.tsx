@@ -1,11 +1,15 @@
 import React from "react";
 
-import { usePresence } from "../../../utils/usePresence";
+import { PresenceType, usePresence } from "../../../utils/usePresence";
 
-const PresenceDot = ({ uid }: any) => {
+interface Props {
+  uid: string;
+}
+
+const PresenceDot = ({ uid }: Props) => {
   const presence = usePresence(uid);
 
-  const getDot = (presence: any) => {
+  const getDot = (presence: PresenceType) => {
     if (!presence) {
       return <></>;
     }

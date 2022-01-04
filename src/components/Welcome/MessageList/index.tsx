@@ -35,6 +35,7 @@ const MessageList = ({ user }: Props) => {
           setMessageList(messages);
         }
       );
+
       return () => unsub();
     }
   }, [currentChat]);

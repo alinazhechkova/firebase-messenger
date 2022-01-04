@@ -10,9 +10,10 @@ import PasswordInput from "../../common/CustomInput/PasswordInput";
 
 import { Button } from "@material-ui/core";
 
-import "../Auth.scss";
 import validateRegister, { validateEmail } from "../../../utils/validation";
 import { defaultErrorObj } from "../Register";
+
+import "../Auth.scss";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -20,9 +21,10 @@ const Login = () => {
   const [errors, setErrors] = useState<any>(defaultErrorObj);
   const { currentUser } = useContext(MessengerContext);
 
-  const submit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     validateRegister({ email, password }, setErrors);
+
     if (!validateEmail(email) && password.trim()) {
       signIn(email, password);
     }
@@ -35,7 +37,7 @@ const Login = () => {
   return (
     <div className="login form-wrapper">
       <div className="container">
-        <form className="login__form" onSubmit={submit}>
+        <form className="login__form" onSubmit={onSubmit}>
           <EmailInput value={email} setValue={setEmail} error={errors?.email} />
           <PasswordInput
             value={password}

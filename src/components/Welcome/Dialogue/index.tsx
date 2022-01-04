@@ -17,11 +17,11 @@ interface Props {
 }
 
 const Dialogue = ({ user }: Props) => {
+  const [text, setText] = useState("");
+
   const { currentChat, setCurrentChat } = useContext(MessengerContext);
 
   const senderId = auth.currentUser!.uid;
-
-  const [text, setText] = useState("");
 
   return (
     <div className="dialogue">
