@@ -10,6 +10,7 @@ type SignUpInfo = {
   password: string;
   name: string;
 };
+
 export const isOfflineForDatabase = {
   state: "offline",
   lastChanged: firebase.database.ServerValue.TIMESTAMP,

@@ -19,7 +19,7 @@ const Message = ({ message }: Props) => {
       <div className="message-content">
         {message.title}
         <div className="message-content-container">
-          {moment(message.createdAt.toDate()).format("D MMM H:M")}
+          {moment(message.createdAt.toDate()).format("D MMM HH:MM")}
         </div>
       </div>
     </div>

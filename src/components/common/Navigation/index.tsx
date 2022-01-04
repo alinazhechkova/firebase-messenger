@@ -1,33 +1,25 @@
-import { Breadcrumbs } from "@material-ui/core";
 import { auth } from "../../../firebase";
-import { Link as RouterLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { Link, LinkProps } from "@material-ui/core";
+import { useContext } from "react";
+import { MessengerContext } from "../../../Provider";
 
-interface LinkRouterProps extends LinkProps {
-  to: string;
-}
+import "./Navigation.scss";
 
-const LinkRouter = (props: LinkRouterProps) => (
-  <Link {...props} component={RouterLink as any} />
-);
+const Navigation = () => {
+  const { currentUser } = useContext(MessengerContext);
 
-const Navigation = () => (
-  <Breadcrumbs aria-label="breadcrumb">
-    <LinkRouter underline="hover" color="primary" to="/">
-      Home
-    </LinkRouter>
-    <LinkRouter
-      underline="hover"
-      color="primary"
-      onClick={() => {
-        auth.signOut();
-      }}
-      to="/login"
-    >
-      Login
-    </LinkRouter>
-  </Breadcrumbs>
-);
+  return (
+    <div className="navigation">
+      <div className="navigation__list">
+        <Link to="/">Home</Link>
+        <Link onClick={() => auth.signOut()} to="/login">
+          Login
+        </Link>
+      </div>
+      <div className="navigation__greetings">Welcome, {currentUser?.name}</div>
+    </div>
+  );
+};
 
 export default Navigation;

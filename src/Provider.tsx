@@ -5,7 +5,6 @@ import { auth, db } from "./firebase/";
 import {
   isOfflineForDatabase,
   isOnlineForDatabase,
-  updatePresense,
 } from "./firebase/requests/auth";
 
 export const MessengerContext = createContext<any>(null);
@@ -20,10 +19,11 @@ export const Provider = ({ children }: Props) => {
 
   useEffect(() => {
     let userStatusRef: firebase.database.Reference;
+    let userRef: firebase.firestore.DocumentReference;
     auth.onAuthStateChanged(async (authObj) => {
       if (authObj) {
         userStatusRef = firebase.database().ref(`/status/${authObj.uid}`);
-        const userRef = db.collection("users").doc(authObj.uid);
+        userRef = db.collection("users").doc(authObj.uid);
         userRef.onSnapshot((doc) => {
           const data = doc.data();
           const userData = {
@@ -36,7 +36,7 @@ export const Provider = ({ children }: Props) => {
             .database()
             .ref(".info/connected")
             .on("value", (snapshot) => {
-              if (!!snapshot.val() === false) {
+              if (snapshot.val() === false) {
                 return;
               }
               userStatusRef
@@ -48,7 +48,9 @@ export const Provider = ({ children }: Props) => {
             });
         });
       } else {
-        userStatusRef.off();
+        if (userStatusRef) {
+          userStatusRef.off();
+        }
         firebase.database().ref(".info/connected").off();
         setCurrentUser(null);
       }

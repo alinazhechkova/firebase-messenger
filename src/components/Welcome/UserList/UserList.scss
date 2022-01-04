@@ -1,5 +1,5 @@
 .users-list {
-  width: 30%;
+  width: 20%;
   &__item {
     display: block;
     padding: 10px 0;
@@ -10,10 +10,39 @@
     width: 200px;
     height: 50px;
     border-radius: 5px;
+    border: 1px solid grey;
     position: relative;
     cursor: pointer;
     &:hover {
       background-color: #6d77ebb6;
     }
+  }
+}
+.user-wrap {
+  cursor: pointer;
+  padding: 10px 50px;
+  &:hover {
+    background-color: rgba(209, 209, 209, 0.639);
+  }
+  h2 {
+    font-size: 18px;
+    color: rgb(12, 91, 93);
+    font-weight: 700;
+    text-transform: uppercase;
+    position: relative;
+    display: block;
+  }
+}
+.dot {
+  display: block;
+  height: 10px;
+  width: 10px;
+  background-color: red;
+  position: absolute;
+  top: 0;
+  right: -20px;
+  border-radius: 50%;
+  &_active {
+    background-color: green;
   }
 }

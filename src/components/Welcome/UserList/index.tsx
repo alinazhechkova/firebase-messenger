@@ -5,7 +5,7 @@ import { auth, db } from "../../../firebase";
 import { MessengerContext } from "../../../Provider";
 import { usePresence } from "../../../utils/usePresence";
 
-import { Box, Tab, Tabs } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 
 import "./UserList.scss";
 
@@ -13,21 +13,8 @@ interface Props {
   setUser: React.Dispatch<SetStateAction<User | null>>;
 }
 
-const getText = (presence: any) => {
-  if (!presence) {
-    return "Unknown state";
-  }
-  return presence.state === "online"
-    ? "online"
-    : `last active ${new Date(presence.lastChanged)}`;
-};
-
 const UserList = ({ setUser }: Props) => {
   const [users, setUsers] = useState<User[]>();
-  const [value, setValue] = React.useState(0);
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
 
   const { currentUser, setCurrentChat } = useContext<any>(MessengerContext);
 
@@ -57,43 +44,41 @@ const UserList = ({ setUser }: Props) => {
   };
 
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        bgcolor: "background.paper",
-        display: "flex",
-        height: 224,
-      }}
-    >
+    <div className="users-list">
       <div>
         {users &&
-          users.map((user, index) => {
-            return (
-              <>
-                <Tab
-                  key={user.uid}
-                  label={user.name}
-                  onClick={() => currentChat(user)}
-                />
+          users.map((user) => (
+            <div
+              className="user-wrap"
+              key={user.uid}
+              onClick={() => currentChat(user)}
+            >
+              <h2>
+                {user.name}
                 <PresenceDot uid={user.uid} />
-              </>
-            );
-          })}
+              </h2>
+            </div>
+          ))}
       </div>
-    </Box>
+    </div>
   );
 };
 
 export default UserList;
 
-function a11yProps(index: number) {
-  return {
-    id: `vertical-tab-${index}`,
-    "aria-controls": `vertical-tabpanel-${index}`,
-  };
-}
-
 const PresenceDot = ({ uid }: any) => {
   const presence = usePresence(uid);
+
+  const getText = (presence: any) => {
+    if (!presence) {
+      return <></>;
+    }
+    return presence.state === "online" ? (
+      <div className="dot_active dot" />
+    ) : (
+      <div className="dot" />
+    );
+  };
+
   return <>{getText(presence)}</>;
 };
