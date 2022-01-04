@@ -71,7 +71,7 @@ const Register = () => {
           </Button>
           <p>
             Have an account?{" "}
-            <Link className="link-to-page" to="/login">
+            <Link className="login__link" to="/login">
               Log in
             </Link>
           </p>

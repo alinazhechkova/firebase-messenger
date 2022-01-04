@@ -15,4 +15,11 @@
       background-color: #627b58;
     }
   }
+  .login__link {
+    background-color: transparent;
+    color: var(--color-text);
+    display: inline;
+    padding: 20px 0;
+    text-decoration: underline;
+  }
 }
