@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 import { db } from "../../../firebase";
 import Message from "./Message";
@@ -8,6 +8,7 @@ import { MessengerContext } from "../../../context/Provider";
 import NoMessage from "../../../images/no-search-result.svg";
 
 import "./MessageList.scss";
+import ReactDOM from "react-dom";
 
 interface Props {
   user: User;
@@ -16,6 +17,16 @@ interface Props {
 const MessageList = ({ user }: Props) => {
   const [messageList, setMessageList] = useState<MessageType[]>([]);
   const { currentChat } = useContext(MessengerContext);
+  const chatRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (chatRef && chatRef.current) {
+      chatRef.current.addEventListener("DOMNodeInserted", (event) => {
+        const target = event.currentTarget as Element;
+        target.scroll({ top: target.scrollHeight });
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (user && currentChat) {
@@ -43,7 +54,7 @@ const MessageList = ({ user }: Props) => {
   return (
     <div className="dialogue__messages messages">
       {messageList.length ? (
-        <div className="messages__list">
+        <div className="messages__list" ref={chatRef}>
           {messageList.map((message, index) => (
             <Message key={index} message={message} />
           ))}

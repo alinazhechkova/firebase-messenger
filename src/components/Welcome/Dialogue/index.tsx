@@ -7,7 +7,7 @@ import { MessengerContext } from "../../../context/Provider";
 
 import MessageList from "../MessageList";
 
-import { Button, IconButton, TextField } from "@material-ui/core";
+import { IconButton, TextField } from "@material-ui/core";
 import NoMessages from "../../../images/noSelectedMessages.svg";
 
 import "./Dialogue.scss";
