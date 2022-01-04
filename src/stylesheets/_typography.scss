@@ -1,0 +1,32 @@
+.container {
+  max-width: var(--container-width);
+  padding: 0 var(--default-gap);
+  margin: 0 auto;
+}
+h1,
+h2,
+h3,
+p {
+  font-family: var(--default-font);
+  color: var(--color-text);
+}
+h2 {
+  font-size: var(--size-text);
+  font-weight: 500;
+}
+
+h1 {
+  font-weight: 700;
+}
+h3 {
+  font-size: 28px;
+  color: rgb(46, 56, 65);
+  text-align: center;
+}
+#component-error-text {
+  color: rgba(145, 0, 0, 0.659);
+  font-size: 12px;
+}
+body {
+  background-color: #f9fbf2;
+}

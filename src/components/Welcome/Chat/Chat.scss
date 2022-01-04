@@ -1,8 +1,10 @@
 .chat {
   &__wrap {
     display: flex;
-    height: 500px;
+    justify-content: space-between;
+    max-width: var(--container-width);
+    width: 100%;
+    height: calc(100vh - 200px);
     padding: 50px 0;
-    justify-content: center;
   }
 }

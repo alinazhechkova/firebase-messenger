@@ -12,12 +12,11 @@ const Navigation = () => {
   return (
     <div className="navigation">
       <div className="navigation__list">
-        <Link to="/">Home</Link>
+        <h1 className="navigation__greetings">Welcome, {currentUser?.name}</h1>
         <Link onClick={() => auth.signOut()} to="/login">
-          Login
+          Log Out
         </Link>
       </div>
-      <div className="navigation__greetings">Welcome, {currentUser?.name}</div>
     </div>
   );
 };

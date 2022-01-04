@@ -3,10 +3,12 @@
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    align-items: center;
+    justify-content: space-between;
     a {
       display: block;
       padding: 10px 20px;
-      background-color: #99a799;
+      background-color: var(--color-primary-1);
       text-transform: uppercase;
       color: #fef5ed;
       text-decoration: none;
@@ -19,5 +21,7 @@
   &__greetings {
     text-align: center;
     font-size: 25px;
+    line-height: 60px;
+    margin-right: 30px;
   }
 }
