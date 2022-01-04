@@ -2,7 +2,7 @@ import React, { SetStateAction, useContext, useEffect, useState } from "react";
 
 import { auth, db } from "../../../firebase";
 
-import { MessengerContext } from "../../../Provider";
+import { MessengerContext } from "../../../context/Provider";
 
 import PresenceDot from "./PresenceDot";
 

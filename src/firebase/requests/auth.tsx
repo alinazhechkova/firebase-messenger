@@ -6,19 +6,9 @@ import { auth, db } from "../index";
 export const usersRef = db.collection("users");
 
 type SignUpInfo = {
-  login: string;
+  email: string;
   password: string;
-  name: string;
-};
-
-export const isOfflineForDatabase = {
-  state: "offline",
-  lastChanged: firebase.database.ServerValue.TIMESTAMP,
-};
-
-export const isOnlineForDatabase = {
-  state: "online",
-  lastChanged: firebase.database.ServerValue.TIMESTAMP,
+  name?: string;
 };
 
 export const signIn = async function (email: string, password: string) {
@@ -30,13 +20,13 @@ export const signIn = async function (email: string, password: string) {
 };
 
 export const createUser = async function (signUpInfo: SignUpInfo) {
-  const { login, password, name } = signUpInfo;
+  const { email, password, name } = signUpInfo;
 
   try {
-    const { user } = await auth.createUserWithEmailAndPassword(login, password);
+    const { user } = await auth.createUserWithEmailAndPassword(email, password);
     const defaultUserSchema = {
       name,
-      login,
+      email,
       uid: user?.uid,
     };
     await usersRef.doc(user?.uid).set(defaultUserSchema);

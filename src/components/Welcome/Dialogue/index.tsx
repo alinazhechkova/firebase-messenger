@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { auth } from "../../../firebase";
 import sendMessage from "../../../firebase/requests/message";
 
-import { MessengerContext } from "../../../Provider";
+import { MessengerContext } from "../../../context/Provider";
 
 import MessageList from "../MessageList";
 

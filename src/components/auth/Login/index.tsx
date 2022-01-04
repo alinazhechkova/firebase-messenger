@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 
 import { signIn } from "../../../firebase/requests/auth";
 
-import { MessengerContext } from "../../../Provider";
+import { MessengerContext } from "../../../context/Provider";
 
 import EmailInput from "../../common/CustomInput/EmailInput";
 import PasswordInput from "../../common/CustomInput/PasswordInput";
@@ -11,16 +11,21 @@ import PasswordInput from "../../common/CustomInput/PasswordInput";
 import { Button } from "@material-ui/core";
 
 import "../Auth.scss";
+import validateRegister, { validateEmail } from "../../../utils/validation";
+import { defaultErrorObj } from "../Register";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [errors, setErrors] = useState<any>(defaultErrorObj);
   const { currentUser } = useContext(MessengerContext);
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    signIn(email, password);
+    validateRegister({ email, password }, setErrors);
+    if (!validateEmail(email) && password.trim()) {
+      signIn(email, password);
+    }
   };
 
   if (currentUser) {
@@ -31,8 +36,12 @@ const Login = () => {
     <div className="login form-wrapper">
       <div className="container">
         <form className="login__form" onSubmit={submit}>
-          <EmailInput value={email} setValue={setEmail} />
-          <PasswordInput value={password} setValue={setPassword} />
+          <EmailInput value={email} setValue={setEmail} error={errors?.email} />
+          <PasswordInput
+            value={password}
+            setValue={setPassword}
+            error={errors?.password}
+          />
           <Button
             type="submit"
             className="custom-button"

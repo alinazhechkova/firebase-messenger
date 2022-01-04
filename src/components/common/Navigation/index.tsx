@@ -2,7 +2,7 @@ import { auth } from "../../../firebase";
 import { Link } from "react-router-dom";
 
 import { useContext } from "react";
-import { MessengerContext } from "../../../Provider";
+import { MessengerContext } from "../../../context/Provider";
 
 import "./Navigation.scss";
 

@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { db } from "../../../firebase";
 import Message from "./Message";
 
-import { MessengerContext } from "../../../Provider";
+import { MessengerContext } from "../../../context/Provider";
 
 import NoMessage from "../../../images/no-search-result.svg";
 

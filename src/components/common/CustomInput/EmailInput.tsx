@@ -1,13 +1,14 @@
 import React, { Dispatch, SetStateAction } from "react";
 
-import { FormControl, Input } from "@material-ui/core";
+import { FormControl, FormHelperText, Input } from "@material-ui/core";
 
 interface Props {
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
+  error?: string;
 }
 
-const EmailInput = ({ value, setValue }: Props) => {
+const EmailInput = ({ value, setValue, error }: Props) => {
   const onInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const email = e.target.value.substring(0, 30);
     setValue(email);
@@ -24,6 +25,9 @@ const EmailInput = ({ value, setValue }: Props) => {
         onChange={onInput}
         id="emailInput"
       />
+      <FormHelperText id="component-error-text" className="form-helper">
+        {error}
+      </FormHelperText>
     </FormControl>
   );
 };

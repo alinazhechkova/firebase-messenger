@@ -1,13 +1,14 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 
-import { FormControl, Input } from "@material-ui/core";
+import { FormControl, FormHelperText, Input } from "@material-ui/core";
 
 interface Props {
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
+  error?: string;
 }
 
-const PasswordInput = ({ value, setValue }: Props) => {
+const PasswordInput = ({ value, setValue, error }: Props) => {
   const [show, setShow] = useState(false);
 
   const onInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +34,9 @@ const PasswordInput = ({ value, setValue }: Props) => {
           onChange={onInput}
           id="passwordInput"
         />
+        <FormHelperText id="component-error-text" className="form-helper">
+          {error}
+        </FormHelperText>
       </FormControl>
     </div>
   );

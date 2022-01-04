@@ -1,17 +1,23 @@
 import firebase from "firebase/compat";
 import React, { createContext, useEffect, useState } from "react";
 
-import { auth, db } from "./firebase/";
-import {
-  isOfflineForDatabase,
-  isOnlineForDatabase,
-} from "./firebase/requests/auth";
+import { auth, db } from "../firebase";
 
 export const MessengerContext = createContext<any>(null);
 
 interface Props {
   children: React.ReactNode;
 }
+
+export const isOfflineForDatabase = {
+  state: "offline",
+  lastChanged: firebase.database.ServerValue.TIMESTAMP,
+};
+
+export const isOnlineForDatabase = {
+  state: "online",
+  lastChanged: firebase.database.ServerValue.TIMESTAMP,
+};
 
 export const Provider = ({ children }: Props) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);

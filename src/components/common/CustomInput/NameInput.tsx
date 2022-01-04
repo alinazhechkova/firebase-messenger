@@ -1,13 +1,13 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { FormControl, Input } from "@material-ui/core";
+import { FormControl, FormHelperText, Input } from "@material-ui/core";
 
 interface Props {
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
-  err?: string;
+  error?: string;
 }
 
-const NameInput = ({ value, setValue, err }: Props) => {
+const NameInput = ({ value, setValue, error }: Props) => {
   const onInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value.substring(0, 20);
     setValue(newValue);
@@ -24,6 +24,9 @@ const NameInput = ({ value, setValue, err }: Props) => {
         onChange={onInput}
         id="nameInput"
       />
+      <FormHelperText id="component-error-text" className="form-helper">
+        {error}
+      </FormHelperText>
     </FormControl>
   );
 };
