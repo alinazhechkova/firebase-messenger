@@ -1,3 +1,4 @@
+import moment from "moment";
 import React from "react";
 
 import { PresenceType, usePresence } from "../../../utils/usePresence";
@@ -13,11 +14,12 @@ const PresenceDot = ({ uid }: Props) => {
     if (!presence) {
       return <></>;
     }
-    return presence.state === "online" ? (
-      <div className="dot_active dot" />
-    ) : (
-      <div className="dot" />
-    );
+    if (presence.state === "offline") {
+      const lastSeen = moment(presence.lastChanged).format("MMM DD HH:MM");
+      return <div className="dot" title={`Last seen at ${lastSeen}`} />;
+    } else {
+      return <div className="dot_active dot" title="Online" />;
+    }
   };
 
   return getDot(presence);
