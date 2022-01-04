@@ -5,7 +5,7 @@ import { usePresence } from "../../../utils/usePresence";
 const PresenceDot = ({ uid }: any) => {
   const presence = usePresence(uid);
 
-  const getText = (presence: any) => {
+  const getDot = (presence: any) => {
     if (!presence) {
       return <></>;
     }
@@ -16,7 +16,7 @@ const PresenceDot = ({ uid }: any) => {
     );
   };
 
-  return <>{getText(presence)}</>;
+  return getDot(presence);
 };
 
 export default PresenceDot;

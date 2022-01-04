@@ -40,13 +40,17 @@ const MessageList = ({ user }: Props) => {
   }, [currentChat]);
 
   return (
-    <div className="dialogue__messages">
+    <div className="dialogue__messages messages">
       {messageList.length ? (
-        messageList.map((message, index) => (
-          <Message key={index} message={message} />
-        ))
+        <div className="messages__list">
+          {messageList.map((message, index) => (
+            <Message key={index} message={message} />
+          ))}
+        </div>
       ) : (
-        <img src={NoMessage} alt="no messages" />
+        <div className="messages__no-message">
+          <img src={NoMessage} alt="no messages" />
+        </div>
       )}
     </div>
   );

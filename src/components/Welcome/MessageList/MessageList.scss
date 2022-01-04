@@ -1,9 +1,18 @@
-.dialogue__messages {
-  display: flex;
-  flex-direction: column;
-  padding: 50px;
+.messages {
   height: 100%;
-  overflow-y: scroll;
+  &__no-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  &__list {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    height: 100%;
+  }
 }
 ::-webkit-scrollbar {
   width: 15px;
