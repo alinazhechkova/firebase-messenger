@@ -10,6 +10,7 @@ export type PresenceType = PresenceReference | null;
 
 export const usePresence = (uid: string) => {
   const [presence, setPresence] = useState<PresenceType>(null);
+
   useEffect(() => {
     const userStatusRef = firebase.database().ref(`/status/${uid}`);
     userStatusRef.on("value", (snap) => {
