@@ -16,6 +16,9 @@
   &__messages {
     flex-grow: 1;
     width: 100%;
+    @media (max-width: 576px) {
+      height: 90%;
+    }
   }
   .MuiButtonBase-root {
     align-self: flex-end;
@@ -28,5 +31,8 @@
   }
   @media (max-width: 768px) {
     width: 100%;
+  }
+  @media (max-width: 576px) {
+    padding: 10px;
   }
 }
