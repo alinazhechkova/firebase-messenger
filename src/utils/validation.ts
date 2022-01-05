@@ -1,5 +1,5 @@
 import React, { SetStateAction } from "react";
-import { FormDataType } from "../components/auth/Register";
+import { FormDataType } from "@/components/auth/Register";
 
 export const validateEmail = (email: string): string => {
   if (!email.trim()) {

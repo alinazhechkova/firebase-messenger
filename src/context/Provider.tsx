@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 
 import firebase from "firebase/compat";
-import { auth, db, realtime } from "../firebase";
+import { auth, db, realtime } from "@/firebase";
 
 export const MessengerContext = createContext<any>(null);
 

@@ -1,5 +1,5 @@
-import firebase from "firebase/compat";
 import { useEffect, useState } from "react";
+import firebase from "firebase/compat";
 
 type PresenceReference = {
   state: string;
