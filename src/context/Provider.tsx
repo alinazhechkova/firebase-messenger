@@ -1,7 +1,7 @@
 import firebase from "firebase/compat";
 import React, { createContext, useEffect, useState } from "react";
 
-import { auth, db } from "../firebase";
+import { auth, db, realtime } from "../firebase";
 
 export const MessengerContext = createContext<any>(null);
 
@@ -25,11 +25,11 @@ export const Provider = ({ children }: Props) => {
 
   useEffect(() => {
     let userStatusRef: firebase.database.Reference;
-    let userRef: firebase.firestore.DocumentReference;
+
     auth.onAuthStateChanged(async (authObj) => {
       if (authObj) {
-        userStatusRef = firebase.database().ref(`/status/${authObj.uid}`);
-        userRef = db.collection("users").doc(authObj.uid);
+        userStatusRef = realtime.ref(`/status/${authObj.uid}`);
+        const userRef = db.collection("users").doc(authObj.uid);
         userRef.onSnapshot((doc) => {
           const data = doc.data();
           const userData = {
@@ -38,26 +38,23 @@ export const Provider = ({ children }: Props) => {
             uid: authObj.uid,
           };
           setCurrentUser(userData);
-          firebase
-            .database()
-            .ref(".info/connected")
-            .on("value", (snapshot) => {
-              if (snapshot.val() === false) {
-                return;
-              }
-              userStatusRef
-                .onDisconnect()
-                .set(isOfflineForDatabase)
-                .then(() => {
-                  userStatusRef.set(isOnlineForDatabase);
-                });
-            });
+          realtime.ref(".info/connected").on("value", (snapshot) => {
+            if (snapshot.val() === false) {
+              return;
+            }
+            userStatusRef
+              .onDisconnect()
+              .set(isOfflineForDatabase)
+              .then(() => {
+                userStatusRef.set(isOnlineForDatabase);
+              });
+          });
         });
       } else {
         if (userStatusRef) {
           userStatusRef.off();
         }
-        firebase.database().ref(".info/connected").off();
+        realtime.ref(".info/connected").off();
         setCurrentUser(null);
       }
     });

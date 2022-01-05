@@ -12,3 +12,4 @@ export const app = !firebase.apps.length
 
 export const auth = app.auth();
 export const db = app.firestore();
+export const realtime = firebase.database();
