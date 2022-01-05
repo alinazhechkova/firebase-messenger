@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
 
 import { auth } from "../../../firebase";
-import sendMessage from "../../../firebase/requests/message";
+import sendMessage from "@/firebase/requests/message";
 
-import { MessengerContext } from "../../../context/Provider";
+import { MessengerContext } from "@/context/Provider";
 
 import MessageList from "../MessageList";
 
 import { IconButton, TextField } from "@material-ui/core";
-import NoMessages from "../../../images/noSelectedMessages.svg";
+import NoMessages from "@/images/noSelectedMessages.svg";
 
 import "./Dialogue.scss";
 

@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 
-import { db } from "../../../firebase";
+import { db } from "@/firebase";
+import { MessengerContext } from "@/context/Provider";
+
 import Message from "./Message";
-
-import { MessengerContext } from "../../../context/Provider";
-
-import NoMessage from "../../../images/no-search-result.svg";
+import NoMessage from "@/images/no-search-result.svg";
 
 import "./MessageList.scss";
-import ReactDOM from "react-dom";
 
 interface Props {
   user: User;

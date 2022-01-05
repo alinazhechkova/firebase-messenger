@@ -1,6 +1,6 @@
 import React from "react";
 
-import Navigation from "../common/Navigation";
+import Navigation from "@/components/common/Navigation";
 import Chat from "./Chat";
 
 import "./Welcome.scss";

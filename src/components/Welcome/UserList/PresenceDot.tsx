@@ -1,7 +1,8 @@
-import moment from "moment";
 import React from "react";
 
-import { PresenceType, usePresence } from "../../../utils/usePresence";
+import moment from "moment";
+
+import { PresenceType, usePresence } from "@/utils/usePresence";
 
 interface Props {
   uid: string;

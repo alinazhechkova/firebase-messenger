@@ -6,15 +6,16 @@ import React, {
   useState,
 } from "react";
 
-import { auth, db } from "../../../firebase";
+import { auth, db } from "@/firebase";
 
-import { MessengerContext } from "../../../context/Provider";
+import { MessengerContext } from "@/context/Provider";
 
 import PresenceDot from "./PresenceDot";
 
+import useWindowDimensions from "@/hooks/useWindowDimensions";
+import useClickOutside from "@/hooks/useClickOutside";
+
 import "./UserList.scss";
-import useWindowDimensions from "../../../hooks/useWindowDimensions";
-import useClickOutside from "../../../hooks/useClickOutside";
 
 interface Props {
   setUser: React.Dispatch<SetStateAction<User | null>>;

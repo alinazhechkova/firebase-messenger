@@ -1,17 +1,17 @@
 import React, { useContext, useState } from "react";
 
 import { Link, Redirect } from "react-router-dom";
-import { createUser } from "../../../firebase/requests/auth";
+import { createUser } from "@/firebase/requests/auth";
 
-import { MessengerContext } from "../../../context/Provider";
+import { MessengerContext } from "@/context/Provider";
 
-import EmailInput from "../../common/CustomInput/EmailInput";
-import PasswordInput from "../../common/CustomInput/PasswordInput";
-import NameInput from "../../common/CustomInput/NameInput";
+import EmailInput from "@/components/common/CustomInput/EmailInput";
+import PasswordInput from "@/components/common/CustomInput/PasswordInput";
+import NameInput from "@/components/common/CustomInput/NameInput";
 
 import { Button } from "@material-ui/core";
 
-import validateRegister, { validateEmail } from "../../../utils/validation";
+import validateRegister, { validateEmail } from "@/utils/validation";
 
 import "../Auth.scss";
 

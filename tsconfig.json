@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "target": "ESNext",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext", "es5", "es6"],
     "allowJs": false,

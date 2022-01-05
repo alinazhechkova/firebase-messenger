@@ -1,10 +1,9 @@
 import React from "react";
 
-import { auth } from "../../../../firebase";
+import { auth } from "@/firebase";
 
 import moment from "moment";
 
-import User from "../../../../images/user.svg";
 import "./Message.scss";
 
 interface Props {

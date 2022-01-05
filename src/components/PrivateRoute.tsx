@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Route, Redirect, RouteProps } from "react-router-dom";
 
-import { MessengerContext } from "../context/Provider";
+import { MessengerContext } from "@/context/Provider";
 
 const PrivateRoute = ({ path, exact, component, children }: RouteProps) => {
   const { currentUser } = useContext<any>(MessengerContext);
