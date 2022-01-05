@@ -16,10 +16,10 @@ export const validateEmail = (email: string): string => {
 };
 
 const validateRegister = (
-  object: any,
+  object: FormDataType,
   setError: React.Dispatch<SetStateAction<Partial<FormDataType>>>
 ): void => {
-  const errorObj: any = {
+  const errorObj: FormDataType = {
     name: "",
     email: "",
     password: "",

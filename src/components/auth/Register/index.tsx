@@ -16,6 +16,7 @@ import validateRegister, { validateEmail } from "@/utils/validation";
 import "../Auth.scss";
 
 export type FormDataType = {
+  [key: string]: any;
   name?: string;
   email: string;
   password: string;
