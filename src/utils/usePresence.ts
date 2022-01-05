@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import firebase from "firebase/compat";
+import { realtime } from "@/firebase";
 
 type PresenceReference = {
   state: string;
@@ -12,7 +12,7 @@ export const usePresence = (uid: string) => {
   const [presence, setPresence] = useState<PresenceType>(null);
 
   useEffect(() => {
-    const userStatusRef = firebase.database().ref(`/status/${uid}`);
+    const userStatusRef = realtime.ref(`/status/${uid}`);
     userStatusRef.on("value", (snap) => {
       if (snap.exists()) {
         const data = snap.val();
